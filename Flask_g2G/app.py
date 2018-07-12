@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, session
-from flask_socketio import SocketIO, emit, join_room
+
 
 class Userinfo:
     def __init__(self, id, nickname, permission):
