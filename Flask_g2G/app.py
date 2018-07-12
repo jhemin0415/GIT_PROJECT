@@ -17,19 +17,17 @@ app = Flask(__name__)
 def main():
     if request.method == 'POST':
         name = request.form['name']
-        return '<h1>Hello %s</h1>' % name
+        return '<h1>Hello %s</h1>' %name
         
     return render_template('main.html')
 
-@app.route('/login', methods = ['GET','POST'])
-def post_login():
-    pass
+@app.route('/<name>')
+def hello_name(name):
+    name = name + 1
+    return '<h1>HELLO %s</h1>' %name
 
-@app.route('/<category>/post')
-def category_post():
-    pass
 
 if __name__ == '__main__':
-    app.run(host = '203.252.231.149', port = 5000, debug = True)
+    app.run(host = '203.252.231.40', port = 5000, debug = True)
 
     print("1")
