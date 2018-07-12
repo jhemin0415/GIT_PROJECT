@@ -2,7 +2,12 @@ from flask import flask, request, render_template, session
 from flask_socketio import SocketIO, emit, join_room
 
 class Userinfo:
-    def __init__(self, )
+    def __init__(self, id, nickname, permission):
+        self.id = id
+        self.nickname = nickname
+        self.permission = permission
+
+    
 
 
 
@@ -15,7 +20,12 @@ def main():
 @app.route('/login', methods = ['GET','POST'])
 def post_login():
     if request.method == 'POST':
-        session['userinfo'] = 
+        request.
+        session['userinfo'] = Userinfo(id, nickname, permission)
+
+@app.route('/<category>/post')
+def category_post():
+    
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
