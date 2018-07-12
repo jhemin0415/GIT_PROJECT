@@ -11,6 +11,7 @@ class Userinfo:
 
 
 
+
 app = Flask(__name__)
 
 @app.route('/', methods = ['POST','GET'])
