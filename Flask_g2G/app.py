@@ -29,3 +29,5 @@ def category_post():
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
+
+    print("1")
