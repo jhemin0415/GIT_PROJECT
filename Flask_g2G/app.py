@@ -11,9 +11,6 @@ class Userinfo:
 
 
 
-
-
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -28,7 +25,7 @@ def post_login():
 
 @app.route('/<category>/post')
 def category_post():
-
+    
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
