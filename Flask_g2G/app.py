@@ -13,19 +13,20 @@ class Userinfo:
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods = ['POST','GET'])
 def main():
+    if request.method == 'POST':
+        return '<h1>POST SUCCESS</h1>'
+        
     return render_template('main.html')
 
 @app.route('/login', methods = ['GET','POST'])
 def post_login():
-    if request.method == 'POST':
-        request.
-        session['userinfo'] = Userinfo(id, nickname, permission)
+    pass
 
 @app.route('/<category>/post')
 def category_post():
-    
+    pass
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
