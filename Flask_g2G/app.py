@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from flask import flask, request, render_template, session
 from flask_socketio import SocketIO, emit, join_room
+=======
+from flask import Flask, request, render_template, session
+
+>>>>>>> e89b7ac15879f9de8ad03868a25528a4f48d1899
 
 class Userinfo:
     def __init__(self, id, nickname, permission):
