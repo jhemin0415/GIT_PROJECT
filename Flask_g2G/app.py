@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session
+from flask import flask, request, render_template, session
 from flask_socketio import SocketIO, emit, join_room
 
 class Userinfo:
@@ -16,8 +16,7 @@ app = Flask(__name__)
 @app.route('/', methods = ['POST','GET'])
 def main():
     if request.method == 'POST':
-        name = request.form['name']
-        return '<h1>Hello %s</h1>' % name
+        return '<h1>POST SUCCESS</h1>'
         
     return render_template('main.html')
 
