@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from flask import Flask, request, render_template, session
 
+=======
+from flask import flask, request, render_template, session
+from flask_socketio import SocketIO, emit, join_room
+>>>>>>> parent of 9fb367e... qwq
 
 class Userinfo:
     def __init__(self, id, nickname, permission):
