@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 from flask import Flask, request, render_template, session
 
-=======
-from flask import flask, request, render_template, session
-from flask_socketio import SocketIO, emit, join_room
->>>>>>> parent of 9fb367e... qwq
 
 class Userinfo:
     def __init__(self, id, nickname, permission):
@@ -25,13 +20,9 @@ def main():
         
     return render_template('main.html')
 
-@app.route('/login', methods = ['GET','POST'])
-def post_login():
-    pass
-
-@app.route('/<category>/post')
-def category_post():
-    pass
+@app.route('/<name>')
+def name(name):
+    return '<h1>Hello %s</h1>' %name
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
