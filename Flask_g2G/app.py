@@ -22,9 +22,7 @@ def main():
 
 @app.route('/<name>')
 def name(name):
-    return '<h1>Hello %s</h1>' %name
+    return '<h1>Hello %s</h1>]' %name
 
 if __name__ == '__main__':
     app.run(host = '203.252.231.149', port = 5000, debug = True)
-
-    print("1")
