@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Control 페이지</title>
+    <link rel="stylesheet" href="css/control_ex_3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      function menu_able(){
+        document.querySelector('.menu').style.backgroundColor = "rgb(128, 128, 128)";
+        document.querySelector('#menu').style.color = "rgb(255, 255, 255)";
+        document.querySelector('.user-info').style.backgroundColor = "rgb(255, 255, 255)";
+        document.querySelector('#members').style.color = "rgb(51, 51, 51)";
+        document.querySelector('.group-menu').style.display = "block";
+        document.querySelector('.body-user-info-control').style.display = "none";
+      }
+      function members_able(){
+        document.querySelector('.user-info').style.backgroundColor = "rgb(128, 128, 128)";
+        document.querySelector('#members').style.color = "rgb(255, 255, 255)";
+        document.querySelector('.menu').style.backgroundColor = "rgb(255, 255, 255)";
+        document.querySelector('#menu').style.color = "rgb(51, 51, 51)";
+        document.querySelector('.group-menu').style.display = "none";
+        document.querySelector('.body-user-info-control').style.display = "block";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="control-warpping">
+      <div class="control-head">
+        <div class="control-header">
+          <div class="main-tit">
+            <h1>관리 <a href="#">메인페이지 제목</a> </h1>
+          </div>
+          <div class="control-nav">
+            <div class="menu" onclick="menu_able()">
+              <span id="menu">Menu</span>
+            </div>
+            <div class="user-info" onclick="members_able()">
+              <span id="members">Members</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="control-body">
+        <div class="control-body-separate">
+          <div class="group-menu">
+            <div class="add-group">
+              <h2>기본 메뉴</h2>
+              <ul>
+                <li>
+                  <div class="group-tit-icon"></div>
+                  <a href="#" title="그룹제목" class="group-tit"><span>그룹제목</span></a>
+                </li>
+                <li>
+                  <div class="board-icon"></div>
+                  <a href="#" title="게시판" class="board"><span>게시판</span></a>
+                </li>
+                <li>
+                  <div class="separate-line-icon"></div>
+                  <a href="#" title="구분선" class="separate-line"><span>구분선</span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="add-btn">
+              <button type="button" id="add-btn" name="button">+</button>
+            </div>
+            <div class="edit-set-group">
+              <div class="edit-set-controlBox">
+                <nav id="edit-set-controlBtn">
+                  <span id="up-btn">△</span>
+                  <span id="down-btn">▽</span>
+                  <span id="tab-btn">들여쓰기</span>
+                  <span id="cut-btn">그룹접기</span>
+                  <span id="del-btn">삭제</span>
+                </nav>
+                <div class="edit-set-result">
+                  <ul>
+                    <li><a href="#"><span>전체 게시판</span></a></li>
+                    <li><a href="#"><span>구분선</span></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="edit-set-content">
+                <!-- 그룹제목 or 게시판  제목 및 설정구간-->
+                그룹제목 또는 게시판 제목 및 설명에 관한 설정구간
+              </div>
+            </div>
+            <button type="button" id="storageBtn" name="button">저장</button>
+          </div>
+          <div class="body-user-info-control">
+            <div class="user-info-head">
+              <h1>Members</h1>
+            </div>
+            <div class="user-info-search">
+              <form class="searchForm" action="#" method="post">
+                <div class="search-wrapping">
+                  <label for="infoSerach">멤버 검색</label>
+                  <select id="infoSerach">
+                    <option value="id">아이디</option>
+                    <option value="username">닉네임</option>
+                  </select>
+                  <input type="search" id="inp-search" name="info-search" value="">
+                  <input type="button" id="search-btn" name="" value="검색">
+                </div>
+              </form>
+            </div>
+            <div class="user-info-result">
+              <div class="result-head">
+                <h2>멤버 수: number</h2>
+              </div>
+              <div class="result-body">
+                <table id="result-info">
+                  <tr class="info-role">
+                    <td class="info-icon">■</td>
+                    <td class="info-username">닉네임</td>
+                    <td class="info-id">아이디</td>
+                    <td class="info-email">이메일</td>
+                    <td class="info-permission">Permission</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>가입 정보 입력</title>
+    <link rel="stylesheet" href="css/register_ex_3.css">
+  </head>
+  <body>
+    <div id="registerWrap" class="join_personal">
+      <div id="registerHead">
+        <div class="inner_head">
+          <h1>
+            <a href="#" class="ico_join">
+              <span>메인 페이지 제목</span>
+            </a>
+          </h1>
+        </div>
+      </div>
+      <hr class="hide">
+      <h2 class="screen_out">회원가입 안내 본문</h2>
+      <div id="registerBody" class="cont_personal">
+        <div class="wrap_tit">
+          <h3 class="tit_join">가입 정보 입력</h3>
+          <div class="txt_desc">
+            로그인 정보 및 가입 정보를 입력하세요.
+          </div>
+        </div>
+        <form id="joinInput" name="joinInput" class="" action="#" method="post">
+          <fieldset class="fld_comm">
+            <legend class="screen_out">가입 정보</legend>
+            <div class="wrap_info">
+              <div class="box_info">
+                <dl class="item_info">
+                  <dt>
+                    <label for="inpID" class="lab_info">아이디</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="text" id="registerID" name="registerID" class="inp_info" placeholder="아이디" autocomplete="off" maxlength="15">
+                      <span class="mark_valid" style="display:none;">
+                        <span class="screen_out">유효</span>
+                      </span>
+                    </div>
+                    <p class="txt_message" style="display:none;">이미 사용된 아이디입니다. 다른 아이디를 입력하세요</p>
+                  </dd>
+                </dl>
+                <dl class="item_info info_password">
+                  <dt>
+                    <label for="inpPW1" class="lab_info">비밀번호</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="password" id="registerPW1" name="registerPW1" class="inp_info pw" placeholder="비밀번호(8자 이상)" maxlength="32">
+                      <span class="mark_valid" style="display: none;">불가</span>
+                    </div>
+                  </dd>
+                  <dt>
+                    <label for="inpPW2" class="lab_info">비밀번호 재확인</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="password" id="registerPW2" name="registerPW2" class="inp_info pw" placeholder="비밀번호 재확인" maxlength="32">
+                      <span class="mark_valid" style="display:none;">불일치</span>
+                    </div>
+                    <p class="txt_message" style="display: none;"></p>
+                  </dd>
+                </dl>
+              </div>
+              <div class="box_info">
+                <dl class="item_info">
+                  <dt>
+                    <label for="inpUserName" class="lab_info">닉네임</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="text" id="UserName" name="UserName" class="inp_info" placeholder="닉네임" maxlength="30">
+                      <span class="mark_valid">
+                        <span class="screen_out">유효</span>
+                      </span>
+                    </div>
+                    <p class="txt_message" style="display:none;"></p>
+                  </dd>
+                </dl>
+                <dl id="authenticationContainer" class="item_info info_email">
+                  <dt>
+                    <label for="inpEmail" lab_info>이메일</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="email" id="email" name="email" class="inp_info" placeholder="인증용 이메일(선택)" autocomplete="off">
+                      <button type="button" id="authBtn" class="btn_check disabled">인증</button>
+                    </div>
+                  </dd>
+                </dl>
+                <dl class="item_info info_email">
+                  <dt>
+                    <label for="inpAuthCode" class="lab_info screen_out">이메일 인증 번호</label>
+                  </dt>
+                  <dd>
+                    <div class="wrap_inp">
+                      <!-- 텍스트 입력 시 .screen_out -->
+                      <input type="text" id="inpAuthCode" name="inpAuthCode" class="inp_info" placeholder="인증번호" maxlength="6" autocomplete="off" disabled>
+                      <button type="button" id="confirmBtn" class="btn_check disabled">확인</button>
+                      <span class="mark_valid" id="matchedAuthCodeText" style="display:none;">일치</span>
+                      <!-- 입력 완료시 .display 제거 -->
+                    </div>
+                    <p class="txt_message" style="display:none;"></p>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="wrap_btn">
+              <button type="submit" class="btn_comm btn_type1">회원가입</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
