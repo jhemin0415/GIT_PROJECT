@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>닉네임 변경</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/change_check.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="change-main">
+      <div class="change-head">
+        <div class="main-tit">
+          <h1>CJU DBLaB</h1>
+        </div>
+        <div class="sub-tit">
+          <h2>닉네임 변경</h2>
+        </div>
+      </div>
+      <div class="change-body">
+        <div class="change-body-main">
+          <div class="inpInfo">
+            <dl class="item_info">
+              <dt>
+                <label for="inpEmail">닉네임</label>
+              </dt>
+              <dd>
+                <div class="change-form">
+                  <input type="email" class="inp" id="inpUsername" name="username" placeholder="변경할 닉네임을 입력해주세요.">
+                </div>
+              </dd>
+              <p class="txt_message" style="display:none;"></p>
+            </dl>
+          </div>
+          <div class="submitBtn">
+            <input type="button" name="" value="변경" onclick="change()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function change(){
+        var name = document.querySelector('#inpUsername').value;
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          url: '/change_username',
+          traditional: 'true',
+          data: JSON.stringify({"value":"Username", "Username": name}),
+          dataType: 'json',
+          success: function(data){
+            if(data.data == 0){
+              document.querySelector('.txt_message').innerHTML = "동일한 닉네임이 존재해 변경이 실패하셨습니다. 변경할 닉네임을 다시 입력해주세요."
+            }
+            else {
+              alert('닉네임 변경이 성공했습니다.');
+              window.close();
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

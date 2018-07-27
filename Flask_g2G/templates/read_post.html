@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main 페이지</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/read_post.css')}}">
+  </head>
+  <body>
+    <div class="main-background">
+      <div class="main-head">
+        <div class="main-head-skin">
+          <div></div>
+          <h1 id="main-header"><a href="/">CJU DBLaB</a></h1>
+        </div>
+      </div>
+      <div class="main-body">
+        <div class="main-body-skin">
+          <div class="main-spacing"></div>
+          <div class="main-body-left">
+            <div class="body-left-skin">
+              <div class="left-skin-login">
+              {% if session['username'] %}
+                <div class="left-skin-top">
+                  <div class="user-info">
+                    <p>{{session['username']}}</p>
+                  </div>
+                </div>
+                <div class="left-skin-center">
+                  <div class="permission">
+                    <p style="display:none">User Permission</p>
+                    <p style="display:none"><a herf="#">관리</a></p>
+                    <div class="logout-form">
+                      <div id="logout-btn">
+                        <a href="/logout">Log Out</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile">
+                    <div class="profile-form">
+                      <div id="profile-btn">
+                        <a href="/profile">프로필</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom">
+                  <div class="post">
+                    <div class="post-form">
+                      <div id="post-btn">
+                        <a href="/post">글쓰기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="left-skin-top"></div>
+                <div class="left-skin-center">
+                  <div class="login-form">
+                    <div id="login-btn">
+                      <a href="/login">login</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom"></div>
+              {% endif %}
+              </div>
+              <div class="left-skin-nav">
+                <nav class="nav-contents">
+                {% for x in category %}
+                  <ul class="nav-list">
+                    <li class="list-txt"><a href="/post_list?category={{x[2]}}">{{x[0]}}</a></li>
+                  </ul>
+                {% endfor %}
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="main-body-post">
+            <div class="body-post-skin">
+              <div class="post-info info">
+                <div class="post-info-left">
+                  <span class="title">{{ postData[1] }}</span>
+                  <span class="separate">|</span>
+                  <span class="board">{{postData[7]}}</span>
+                </div>
+                <div class="post-info-right">
+                  <span class="day">{{postData[3]}}</span>
+
+                    {% if session['id'] == postData[2] %}
+                  <span class="separate">|</span>
+                  <span class="modify" onclick="modify()">수정</span>
+                  <span class="separate">|</span>
+                  <span class="del" onclick="del()">삭제</span>
+                    {% endif %}
+
+                </div>
+              </div>
+              <div class="border-box-line-dashed"></div>
+              <div class="post-sub-info info">
+                <div class="sub-info-left">
+                  <span id="writer">{{postData[2]}}</span>
+                </div>
+                <div class="sub-info-right"></div>
+              </div>
+              <div class="v-10"></div>
+              <div class="post-textarea">
+                <iframe src="/post/viewer/{{postData[5]}}" frameborder = 0 scrolling="flase" width="100%" style="height: 50vh"></iframe>
+              </div>
+              <div class="v-35"></div>
+              <div class="post-viewer info">
+                <span class="viewer">댓글: {{count[0]}}</span>
+              </div>
+              <div class="post-comment">
+                <ul class="cmlist" id="cm-list">
+                {% if comment %}
+                  {% for commentData in comment %}
+                  <li class="cmlist-info">
+                    <div class="cmUser-info">
+                      <div class="info-left">
+                        <span class="username">{{commentData[1]}}</span>
+                        <span class="comment-day">{{commentData[4]}}</span>
+                      </div>
+                      {% if session['username'] == commentData[1] or not session['username'] %}
+                      <div class="info-right">
+                        <span class="del" onclick="delcomment({{ commentData[0]|int }})">삭제</span>
+                      </div>
+                      {% endif %}
+                    </div>
+                  <p class="cmContents">{{commentData[2]}}</p>
+                  </li>
+                  <li class="comment-box-dashed"></li>
+                  {% endfor %}
+                {% endif %}
+                </ul>
+                <div class="comment-box">
+                  <div class="comment-area">
+                    <textarea class="cmWrite"name="name"></textarea>
+                    <button type="button" name="button" onclick="submit()">등록</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function submit(){
+        var value = document.querySelector('.cmWrite').value;
+        {% if session['username']|safe %}
+        var username = {{session['username']|tojson|safe}};
+        {% endif %}
+
+        var post = {{postData|tojson|safe}}
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          url: '/comment',
+          traditional: 'true',
+          data: JSON.stringify({"writer": username, "comment": value, 'html' : post[5]}),
+          dataType: 'json',
+          success: function(data){
+            window.location.reload();
+          }
+        })
+      }
+
+      function modify(){
+        var post = {{postData|tojson|safe}};
+        window.location.replace('/modify/' + String(post[0]))
+      }
+
+      function delcomment(comment_number){
+        var post = {{postData|tojson|safe}};
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          url: '/del_post',
+          traditional: 'true',
+          data: JSON.stringify({"value": "del_comment", "ID": post[0], 'comment_number' : comment_number}),
+          dataType: 'json',
+          success: function(data){
+            alert('삭제 완료!');
+            window.location.reload();
+          }
+        })
+      }
+
+      function del(){
+        var post = {{postData|tojson|safe}};
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          url: '/del_post',
+          traditional: 'true',
+          data: JSON.stringify({"value": "post_id", "ID": post[0], "html":post[5]}),
+          dataType: 'json',
+          success: function(data){
+            alert('삭제 완료!');
+            location.replace("/");
+          }
+        })
+      }
+
+
+    </script>
+  </body>
+</html>

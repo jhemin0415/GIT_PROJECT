@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main 페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/change_info.js') }}"></script>
+  </head>
+  <body>
+    <div class="main-background">
+      <div class="main-head">
+        <div class="main-head-skin">
+          <div></div>
+          <h1 id="main-header"><a href="/">CJU DBLaB</a></h1>
+        </div>
+      </div>
+      <div class="main-body">
+        <div class="main-body-skin">
+          <div class="main-spacing"></div>
+          <div class="main-body-left">
+            <div class="body-left-skin">
+              <div class="left-skin-login">
+              {% if session['username'] %}
+                <div class="left-skin-top">
+                  <div class="user-info">
+                    <p>{{session['username']}}</p>
+                  </div>
+                </div>
+                <div class="left-skin-center">
+                  <div class="permission">
+                    <p style="display:none">User Permission</p>
+                    <p style="display:none"><a herf="#">관리</a></p>
+                    <div class="logout-form">
+                      <div id="logout-btn">
+                        <a href="/logout">Log Out</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile">
+                    <div class="profile-form">
+                      <div id="profile-btn">
+                        <a href="/profile">프로필</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom">
+                  <div class="post">
+                    <div class="post-form">
+                      <div id="post-btn">
+                        <a href="/post">글쓰기</a>
+                      </div>
+                    </div>
+                 </div>
+                </div>
+              {% else %}
+                <div class="left-skin-top"></div>
+                <div class="left-skin-center">
+                  <div class="login-form">
+                    <div id="login-btn">
+                      <a href="/login">login</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom"></div>
+              {% endif %}
+              </div>
+              <div class="left-skin-nav">
+                  <nav class="nav-contents">
+                  {% for category in categoryData %}
+                    <ul class="nav-list">
+                      <li class="list-txt"><a href="/post_list?category={{category[2]}}">{{category[0]}}</a></li>
+                    </ul>
+                  {% endfor %}
+                  </nav>
+                </div>
+            </div>
+          </div>
+          <div class="main-body-profile">
+            <div class="body-profile-skin">
+              {% if session['username'] == profileName %}
+              <div class="profile-head">
+                <div class="head-left">
+                  <p>{{session['username']}}</p>
+                </div>
+                <div class="head-right">
+                  <div class="right-head" onclick="change_email()">
+                    <a href="#">Email 변경</a>
+                  </div>
+                  <div class="right-center" onclick="change_username()">
+                    <a href="#">닉네임 변경</a>
+                  </div>
+                  <div class="right-bottom" onclick="change_password()">
+                    <a href="#">비밀번호 변경</a>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <div class="profile-head">
+                <div class="head-left">
+                  <p>{{profileName}}</p>
+                </div>
+                <div class="head-right" style="display:none;">
+                  <div class="right-head">
+                  </div>
+                  <div class="right-center">
+                  </div>
+                  <div class="right-bottom">
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              <div class="profile-body">
+                <div class="profile-body-content">
+                  <div class="content-head">
+                    <span>게시글</span>
+                  </div>
+                  <div class="content-body">
+                    <table id="post-list">
+                      <tr>
+                        <td colspan="4" class="body-line"></td>
+                      </tr>
+                      <tr class="post-list-tit tit-head">
+                        <td></td>
+                        <td></td>
+                        <td id="tit">제목</td>
+                        <td id="day">작성일</td>
+                        <td></td>
+                      </tr>
+                      {% for postData in post %}
+                      <tr>
+                        <td colspan="5" class="body-line"></td>
+                      </tr>
+                      <tr class="post-list-tit">
+                        <td></td>
+                        <td class="post-tit" colspan="2">
+                          <span><a href="/read_post/{{postData[0]}}">{{postData[1]}}</a></span>
+                        </td>
+                        <td class="post-day">
+                          <span>{{postData[3]}}</span>
+                        </td>
+                        <td class="post-del">
+                          <button type="button" class="del-btn" name="button" value="{{loop.index - 1}}" onclick="del_post()">삭제</button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      <tr>
+                        <td colspan="5" class="body-line2"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    
+      function del_post(){
+        var num = document.querySelector('.del-btn').value;
+        var post = {{post|tojson|safe}};    
+        console.log(post);
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json;charset=utf-8',
+          url: '/del_post',
+          traditional: 'true',
+          data: JSON.stringify({"value": "post_id", "ID": post[num][0], 'html' : post[num][5]}),
+          dataType: 'json',
+          success: function(data){
+            alert('삭제 완료!');
+            location.replace('/profile');
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

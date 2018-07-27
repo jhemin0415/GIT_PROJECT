@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>이메일 변경</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/change_check.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="change-main">
+      <div class="change-head">
+        <div class="main-tit">
+          <h1>CJU DBLaB</h1>
+        </div>
+        <div class="sub-tit">
+          <h2>이메일 변경</h2>
+        </div>
+      </div>
+      <div class="change-body">
+        <div class="change-body-main">
+          <div class="inpInfo">
+            <dl class="item_info">
+              <dt>
+                <label for="inpEmail">이메일</label>
+              </dt>
+              <dd>
+                <div class="change-form">
+                  <input type="email" class="inp" id="inpEmail" name="email" placeholder="인증할 이메일을 입력해주세요.">
+                  <input type="button" class="check" id="checkBtn"  name="" value="인증" onclick="send_auth()">
+                </div>
+              </dd>
+            </dl>
+            <dl class="item_info">
+              <dt>
+                <label for="inpAuth">인증번호</label>
+              </dt>
+              <dd>
+                <div class="change-form">
+                  <input type="text" class="inp" id="inpAuth" name="authCode" placeholder="인증번호를 입력해주세요." disabled>
+                  <input type="button" class="check" id="authBtn" name="" value="확인" onclick="auth();">
+                </div>
+              </dd>
+              <p class="txt_message" style="display:none;"></p>
+            </dl>
+          </div>
+          <div class="submitBtn">
+            <input type="button" name="" value="변경" onclick="change()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var email_auth_code;
+      var auth_confirm;
+      function send_auth(){
+        var email = document.querySelector('#inpEmail').value;
+        document.querySelector('.txt_message').style.display="block";
+        if(email.includes("@") == true && email.includes(".") == true){
+          document.querySelector('.txt_message').innerHTML = "이메일을 확인했습니다. 입력하신 이메일로 인증번호를 발송하니 확인하여 인증번호를 입력해주세요.";
+          document.querySelector('.txt_message').style.color="rgb(51, 51, 255)";
+          $.ajax({
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            url: '/change_email',
+            traditional: 'true',
+            data: JSON.stringify({"value":"email", "email": email}),
+            dataType: 'json',
+            success: function(data){
+                document.querySelector('#inpAuth').disabled=false;
+                email_auth_code = data.auth_code;
+            }
+          });
+        }
+        else {
+          document.querySelector('.txt_message').innerHTML = "이메일이 아닙니다. 다시 입력해주세요";
+          document.querySelector('.txt_message').style.color="rgb(220, 50, 30)";
+        }
+      }
+
+      function auth(){
+        if(email_auth_code == document.querySelector('#inpAuth').value){
+          document.querySelector('.txt_message').style.display="block";
+          document.querySelector('.txt_message').style.color="rgb(51, 51, 255)";
+          document.querySelector('.txt_message').innerHTML="인증번호가 일치합니다.."
+          auth_confirm = 1;
+        }
+        else{
+          document.querySelector('.txt_message').style.display="block";
+          document.querySelector('.txt_message').style.color="rgb(220, 50, 30)";
+          document.querySelector('.txt_message').innerHTML="인증번호가 맞지 않습니다."
+        }
+      };
+
+
+      function change(){
+        if(auth_confirm == 1){
+          var email = document.querySelector('#inpEmail').value;
+          $.ajax({
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            url: '/change_email',
+            traditional: 'true',
+            data: JSON.stringify({"value":"auth", "email": email}),
+            dataType: 'json',
+            success: function(response){
+              alert('이메일 변경이 성공했습니다.')
+              window.close();
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

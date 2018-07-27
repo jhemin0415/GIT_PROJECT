@@ -1,0 +1,88 @@
+html, body {
+  width: 550px;
+  height: 350px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(230, 230, 230);
+}
+body, div, h1, h2, form, input, table, tr, td, a, ul, li {
+  margin: 0;
+  padding: 0;
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+}
+ul, li {
+  list-style: none;
+}
+hr {
+  display: none;
+}
+.search-head {
+  height: 70px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.search-header {
+  height: 100%;
+}
+.main-tit {
+  height: 40%;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  background-color: rgb(153, 153, 153);
+}
+.main-tit h1{
+  font-size: 1rem;
+  color: rgb(242, 242, 242);
+}
+.search-nav {
+  height: 60%;
+}
+.search-nav span {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+.search-id {
+  width: 47.8%;
+  height: 100%;
+  float: left;
+  border-right: 1px solid rgb(230, 230, 230);
+  background-color: rgb(128, 128, 128);
+  text-align: center;
+}
+#ID {
+  color: rgb(255, 255, 255);
+}
+.search-pw {
+  width: 52%;
+  height: 100%;
+  float: right;
+  text-align: center;
+}
+#PW {
+}
+.search-body {
+  height: 300px;
+  /*height: 700px;*/
+}
+.search-body-separate {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto 0;
+}
+.id-search {
+  margin-top: 15px;
+}
+.result-message{
+  margin: 0 auto;
+  border: 1px solid rgb(230, 230, 230);
+  box-shadow: 0px 3px 6px rgb(51, 51, 51);
+}
+.message-content {
+  margin: 60px 0 0 50px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.message-content button {
+  width: 100px;
+  height: 40px;
+  margin: 20px 0 10px 120px;
+}

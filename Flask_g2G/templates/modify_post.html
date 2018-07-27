@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Main 페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/post.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename = './js/HuskyEZCreator.js') }}" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <div class="main-background">
+      <div class="main-head">
+        <div class="main-head-skin">
+          <div></div>
+          <h1 id="main-header"><a href="/">CJU DBLaB</a></h1>
+        </div>
+      </div>
+      <div class="main-body">
+        <div class="main-body-skin">
+          <div class="main-spacing"></div>
+          <div class="main-body-left">
+            <div class="body-left-skin">
+              <div class="left-skin-login">
+                <div class="left-skin-top">
+                  <div class="user-info">
+                    <p>{{session['username']}}</p>
+
+                  </div>
+                </div>
+                <div class="left-skin-center">
+                  <div class="permission">
+                    <p style="display:none">User Permission</p>
+                    <p style="display:none"><a herf="#">관리</a></p>
+                    <div class="logout-form">
+                      <div id="logout-btn">
+                        <a href="/logout">Log Out</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile">
+                    <div class="profile-form">
+                      <div id="profile-btn">
+                        <a href="/profile">프로필</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom">
+                  <div class="post">
+                    <div class="post-form">
+                      <div id="post-btn">
+                        <a href="/post">글쓰기</a>
+                      </div>
+                    </div>
+                 </div>
+                </div>
+              </div>
+              <div class="left-skin-nav">
+                <nav class="nav-contents">
+                    {% for x in category %}
+                    
+                      <ul class="nav-list">
+                        <li class="list-txt"><a href="/post_list?category={{x[2]}}">{{x[0]}}</a></li>
+                      </ul>
+                    {% endfor %}
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="main-body-post">
+            <div class="post-editor">
+              <h3>Post Editor</h3>
+              <form action="/modify/{{num}}" method="post" accept-charset="UTF-8">
+              <ul class="editor-head">
+                <li>
+                  <label class="item-label" for="board-type">게시판</label>
+                  <div class="board-item">
+                    <select class="board-type-select" name="category" id="board-type" disabled>
+                      <option value="{{post[7]}}">{{post[7]}}</option>
+                    </select>
+
+                    <select class="board-subType-select" name="header" disabled>
+                      <option value="{{post[6]}}">{{post[6]}}</option>
+                    </select>
+                  </div>
+                </li>
+                <li>
+                  <label class="item-label" for="inp_tit">제목</label>
+                  <div class="board-item">
+                    <input type="text" id="inp-tit" name="postTit" placeholder="게시글 제목을 입력하세요" disabled>
+                  </div>
+                </li>
+              </ul>
+
+                <textarea name="ir1" id="ir1" rows="10" cols="100" style="width:720px; height:412px; display:none;"></textarea>
+                <!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
+
+                <button onclick="submitContents(this);">확인</button>
+
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    
+    
+    var oEditors = [];
+
+    // 추가 글꼴 목록
+    //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+    nhn.husky.EZCreator.createInIFrame({
+      oAppRef: oEditors,
+      elPlaceHolder: "ir1",
+      sSkinURI: "/editor_skin",
+      htParams : {
+        bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+        bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+        bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+        //bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+        //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        fOnBeforeUnload : function(){
+          //alert("완료!");
+        }
+      }, //boolean
+      fOnAppLoad : function(){
+        //예제 코드
+        oEditors.getById["ir1"].exec("PASTE_HTML", ["{{contents|safe}}"]);
+      },
+      fCreator: "createSEditor2"
+    });
+
+    function pasteHTML() {
+      var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+      oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+    }
+
+    function showHTML() {
+      var sHTML = oEditors.getById["ir1"].getIR();
+      alert(sHTML);
+    }
+
+    function submitContents(elClickedObj) {
+      oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+
+      // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+      try {
+        elClickedObj.form.submit();
+      } catch(e) {}
+    }
+
+    function setDefaultFont() {
+      var sDefaultFont = '궁서';
+      var nFontSize = 24;
+      oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+    }    
+    
+    </script>
+</html>

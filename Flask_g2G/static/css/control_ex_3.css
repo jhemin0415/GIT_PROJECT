@@ -44,6 +44,7 @@ hr {
   position: relative;
   border-right: 1px solid rgb(230, 230, 230);
   background-color: rgb(128, 128, 128);
+  cursor: pointer;
 }
 #menu {
   position: absolute;
@@ -56,6 +57,7 @@ hr {
   height: 100%;
   float: right;
   position: relative;
+  cursor: pointer;
 }
 #members {
   position: absolute;
@@ -87,10 +89,12 @@ hr {
   color: rgb(127, 127, 127);
   font-size: 16px;
   font-weight: bold;
+  border-bottom: 1px solid rgb(230, 230, 230);
 }
 .add-group ul {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
+  text-align: center;
 }
 .group-tit, .board, .separate-line {
   color: rgb(127, 127, 127);
@@ -100,7 +104,7 @@ hr {
   height: 100%;
   width: 5%;
   float: left;
-  border: 1px solid rgb(230, 230, 230);
+  /*border: 1px solid rgb(230, 230, 230);*/
   position: relative;
 }
 .add-btn button {
@@ -117,25 +121,23 @@ hr {
 }
 .edit-set-controlBox {
   float: left;
-  width: 50%;
   height: 100%;
-  border: 1px solid rgb(230, 230, 230);
 }
 #edit-set-controlBtn {
-  width: 95%;
   height: 10%;
-  margin: 0 auto 0;
   border: 1px solid rgb(230, 230, 230);
 }
 #edit-set-controlBtn span {
+  float: left;
   height: 100%;
-  margin: 0 auto 0;
+  padding: 0 7px 0 8px;
   text-align: center;
   font-size: 1.2rem;
-  border: 1px solid rgb(230, 230, 230);
+  background-color: rgb(230, 230, 230);
+  border: 1px solid rgb(128, 128, 128);
 }
 .edit-set-result {
-  width: 95%;
+  clear: both;
   height: 89.2%;
   margin: 0 auto 0;
   border: 1px solid rgb(230, 230, 230);
@@ -144,13 +146,34 @@ hr {
   margin: 20px 0;
 }
 .edit-set-result ul li {
+  height: 11px;
+  padding: 0;
   margin: 10px 0;
+}
+.separate-line-link {
+  height: 1px !important;
+  padding: 5px 0;
+}
+.sp-line {
+  display: block;
+  height: 1px;
+  min-height: 0;
+  padding: 0 !important;
+  background-color: rgb(230, 230, 230);
+  font-size: 0;
+  line-height: 0;
+  text-indent: -500px;
 }
 .edit-set-content {
   float: left;
   width: 49%;
   height: 100%;
   border: 1px solid rgb(230, 230, 230);
+  padding-left: 30px;
+  font-size: 14px;
+}
+.edit-set-content ul li {
+  list-style: disc;
 }
 #storageBtn {
   width: 95%;

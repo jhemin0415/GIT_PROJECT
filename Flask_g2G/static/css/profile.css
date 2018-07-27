@@ -1,0 +1,258 @@
+html, body {
+  height: 100%;
+  min-height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+body, div, form, h1, h2, h3, nav, table, td {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: rgb(51, 51, 51);
+}
+.main-background {
+  width: 80%;
+  margin: 0 auto 0;
+}
+.main-head {
+  height: 100px;
+  padding-top: 50px;
+  border: 1px solid rgb(230, 230, 230);
+  background-color: rgb(77, 166, 255);
+}
+.main-head-skin {
+  width: 50%;
+  height: 40%;
+  margin: 0 auto 0;
+}
+#main-header {
+  text-align: center;
+}
+#main-header a {
+  color: rgb(250, 250, 250);
+}
+.main-body-skin {
+  position: relative;
+  clear: both;
+}
+.main-body-left {
+  float: left;
+  border: 2px solid rgb(77, 166, 255);;
+}
+.body-left-skin {
+  width: 250px;
+}
+.left-skin-login {
+  height: 300px;
+  border-bottom: 1.5px solid rgb(77, 166, 255);;
+}
+.left-skin-top {
+  height: 25%;
+  border-bottom: 1px solid rgb(77, 166, 255);;
+}
+.user-info {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto 0;
+}
+.user-info p {
+  font-size: 14px;
+  text-align: center;
+}
+.left-skin-center {
+  height: 50%;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.login-form {
+  width: 60%;
+  height: 30%;
+  margin: 0 auto 0;
+  padding-top: 35px;
+}
+#login-btn {
+  width: 100%;
+  height: 80px;
+  font-size: 1.4rem;
+  position: relative;
+  background-color: rgb(26, 140, 255);
+}
+#login-btn:hover {
+  background-color: rgb(128, 191, 255);
+}
+#login-btn a {
+  position: absolute;
+  top: 24px;
+  left: 50px;
+  font-size: 1.4rem;
+}
+.permission {
+  float: left;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid rgb(77, 166, 255);
+}
+.logout-form {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto 0;
+  padding-top: 35px
+}
+#logout-btn {
+  width: 100%;
+  height: 80px;
+  font-size: 1.4rem;
+  position: relative;
+  background-color: rgb(26, 140, 255);
+}
+#logout-btn:hover {
+  background-color: rgb(128, 191, 255);
+}
+#logout-btn a {
+  position: absolute;
+  top: 24px;
+  left: 8px;
+}
+.profile {
+  float: right;
+  width: 47%;
+  height: 100%;
+}
+.profile-form {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto 0;
+  padding-top: 35px;
+}
+#profile-btn {
+  width: 100%;
+  height: 80px;
+  font-size: 1.4rem;
+  position: relative;
+  background-color: rgb(26, 140, 255);
+}
+#profile-btn:hover {
+  background-color: rgb(128, 191, 255);
+}
+#profile-btn a {
+  position: absolute;
+  top: 24px;
+  left: 14px;
+}
+.left-skin-bottom {
+  height: 25%;
+}
+.post {
+  width: 100%;
+  height: 100%;
+}
+.post-form {
+  height: 100%;
+}
+#post-btn {
+  width: 100%;
+  height: 100%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  position: relative;
+  background-color: rgb(26, 140, 255);
+}
+#post-btn:hover {
+  background-color: rgb(128, 191, 255);
+}
+#post-btn a {
+  position: absolute;
+  top: 24px;
+  left: 89px;
+}
+.nav-list {
+  padding-left: 0;
+  list-style: none;
+}
+.list-tit {
+  font-size: 16px;
+  padding-left: 20px;
+}
+.list-txt {
+  font-size: 14px;
+  padding-left: 20px;/*들여쓰기 선택시 padding-left 값 + 45px*/
+}
+.main-body-profile {
+  margin: 0 0 0 252px;
+  border: 1.2px solid rgb(77, 166, 255);
+}
+.body-profile-skin {
+  width: 95%;
+  margin: 14px;
+  position: relative;
+}
+.profile-head {
+  width: 100%;
+  height: 150px;
+  border: 1px solid rgb(77, 166, 255);
+}
+.head-left {
+  width: 39.8%;
+  height: 100%;
+  float: left;
+  border-right: 1px solid rgb(77, 166, 255);
+}
+.head-left p {
+  margin: 18% 0 0 40%;
+}
+.head-right {
+  width: 60%;
+  height: 100%;
+  float: left;
+}
+.head-right div {
+  width: 100%;
+  height: 32.3%;
+  border: 1px solid rgb(77, 166, 255);
+  position: relative;
+  background-color: rgb(26, 140, 255);
+  cursor: pointer;
+}
+.head-right div:hover{
+  background-color: rgb(128, 191, 255);
+}
+.head-right div a {
+  position: absolute;
+  top: 20%;
+  left: 42%;
+}
+.profile-body {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+.content-head {
+  height: 25px;
+  padding: 11px 3px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+.content-body {
+  width: 100%;
+}
+.content-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tit-head {
+  background-color: rgb(230, 230, 230);
+}
+.post-list-tit td {
+  min-height: 14px;
+  padding: 9px 0 7px 0;
+  font-size: 12px;
+}
+.body-line {
+  height: 3px !important;
+  background-color: rgb(230, 230, 230);
+}
+.body-line2 {
+  height: 1px !important;
+  background-color: rgb(230, 230, 230);
+}

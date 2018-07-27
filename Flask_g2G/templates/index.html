@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main 페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  </head>
+  <body>
+    <div class="main-background">
+      <div class="main-head">
+        <div class="main-head-skin">
+          <div></div>
+          <h1 id="main-header"><a href="/">CJU DBLaB</a></h1>
+        </div>
+      </div>
+      <div class="main-body">
+        <div class="main-body-skin">
+          <div class="main-spacing"></div>
+          <div class="main-body-left">
+            <div class="body-left-skin">
+              <div class="left-skin-login">
+              {% if session['username'] %}
+                <div class="left-skin-top">
+                  <div class="user-info">
+                    <p>{{ session['username'] }}</p>
+                  </div>
+                </div>
+                <div class="left-skin-center">
+                  <div class="permission">
+                    <p style="display:none">User Permission</p>
+                    <p style="display:none"><a herf="#">관리</a></p>
+                    <div class="logout-form">
+                      <div id="logout-btn">
+                        <span><a href="/logout">Log Out</a></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile">
+                    <div class="profile-form">
+                      <div id="profile-btn">
+                        <span><a href="/profile">프로필</a></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom">
+                  <div class="post">
+                    <div class="post-form">
+                      <div id="post-btn">
+                        <a href="/post">글쓰기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="left-skin-top"></div>
+                <div class="left-skin-center">
+                  <div class="login-form">
+                    <div id="login-btn">
+                      <a href="/login">login</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="left-skin-bottom"></div>
+              {% endif %}
+              </div>
+              <div class="left-skin-nav">
+                <nav class="nav-contents">
+                {% for category in categoryData %}
+                {# 카테고리 제목 데이터를 받아 category[0]에다 데잍터 넣기 #}
+                  <ul class="nav-list">
+                    <li class="list-txt"><a href="/post_list?category={{category[2]}}">{{category[0]}}</a></li>
+                  </ul>
+                {% endfor %}
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="main-body-post">
+            <div class="body-post-skin">
+              <div class="post-skin-list">
+                <div class="post-tit">
+                  <div class=""></div>
+                  <h3>
+                   <a href="{{ url_for('post_list', category='notice') }}">공지</a>
+                  </h3>
+                </div>
+                <div class="post-txt notice-txt">
+                  <table class="post-table notice-tbl">
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit"><a href="#">제목</a></td>
+                      <td class="post-txt-wr"><a href="#">작성자</a></td>
+                      <td class="post-txt-day">작성일</td>
+                      <td class="post-txt-view">조회수</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    {# post 테이블의 category 열의 값 중 공지(notice) 값에 해당하는 행들 중 최근에 저장된 5게의 행들만 출력하는 부분. #}
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="notice-tit1"><a href="/read_post/{{ noticeData[0][0]}}">{{noticeData[0][1]}}</a></td>
+                      <td class="post-txt-wr" id="notice-wr1"><a href="{{ url_for('profile', name = noticeData[0][2]) }}">{{noticeData[0][2]}}</a></td>
+                      <td class="post-txt-day" id="notice-day1">{{noticeData[0][3]}}</td>
+                      <td class="post-txt-view" id="notice-view1">{{noticeData[0][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="notice-tit2"><a href="/read_post/{{ noticeData[1][0]}}">{{noticeData[1][1]}}</a></td>
+                      <td class="post-txt-wr" id="notice-wr2"><a href="{{ url_for('profile', name = noticeData[1][2]) }}">{{noticeData[1][2]}}</a></td>
+                      <td class="post-txt-day" id="notice-day2">{{noticeData[1][3]}}</td>
+                      <td class="post-txt-view" id="notice-view2">{{noticeData[1][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="notice-tit3"><a href="/read_post/{{ noticeData[2][0]}}">{{noticeData[2][1]}}</a></td>
+                      <td class="post-txt-wr" id="notice-wr3"><a href="{{ url_for('profile', name = noticeData[2][2]) }}">{{noticeData[2][2]}}</a></td>
+                      <td class="post-txt-day" id="notice-day3">{{noticeData[2][3]}}</td>
+                      <td class="post-txt-view" id="notice-view3">{{noticeData[2][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="notice-tit4"><a href="/read_post/{{ noticeData[3][0] }}">{{noticeData[3][1]}}</a></td>
+                      <td class="post-txt-wr" id="notice-wr4"><a href="{{ url_for('profile', name = noticeData[3][2]) }}">{{noticeData[3][2]}}</a></td>
+                      <td class="post-txt-day" id="notice-day4">{{noticeData[3][3]}}</td>
+                      <td class="post-txt-view" id="notice-view4">{{noticeData[3][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="notice-tit5"><a href="/read_post/{{ noticeData[4][0]}}">{{noticeData[4][0]}}</a></td>
+                      <td class="post-txt-wr" id="notice-wr5"><a href="{{ url_for('profile', name = noticeData[4][2]) }}">{{noticeData[4][1]}}</a></td>
+                      <td class="post-txt-day" id="notice-day5">{{noticeData[4][3]}}</td>
+                      <td class="post-txt-view" id="notice-view5">{{noticeData[4][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="post-skin-list">
+                <div class="post-tit">
+                  <div class=""></div>
+                  <h3>
+                   <a href="/post_list">전체 글 보기</a>
+                  </h3>
+                </div>
+                <div class="post-txt">
+                  <table class="post-table">
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit"><a href="#">제목</a></td>
+                      <td class="post-txt-wr"><a href="#">작성자</a></td>
+                      <td class="post-txt-day">작성일</td>
+                      <td class="post-txt-view">조회수</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    {# post table에서 최신에 저장된 10개의 행을 받아 출력하는 부분 #}
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit1"><a href="/read_post/{{postData[0][0]}}">{{postData[0][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr1"><a href="{{ url_for('profile', name = postData[0][2]) }}">{{postData[0][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day1">{{postData[0][3]}}</td>
+                      <td class="post-txt-view" id="post_view1">{{postData[0][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit2"><a href="/read_post/{{postData[1][0]}}">{{postData[1][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr2"><a href="{{ url_for('profile', name = postData[1][2]) }}">{{postData[1][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day2">{{postData[1][3]}}</td>
+                      <td class="post-txt-view" id="post_view2">{{postData[1][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit3"><a href="/read_post/{{postData[2][0]}}">{{postData[2][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr3"><a href="{{ url_for('profile', name = postData[2][2]) }}">{{postData[2][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day3">{{postData[2][3]}}</td>
+                      <td class="post-txt-view" id="post_view3">{{postData[2][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit4"><a href="/read_post/{{postData[3][0]}}">{{postData[3][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr4"><a href="{{ url_for('profile', name = postData[3][2]) }}">{{postData[3][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day4">{{postData[3][3]}}</td>
+                      <td class="post-txt-view" id="post_view4">{{postData[3][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit5"><a href="/read_post/{{postData[4][0]}}">{{postData[4][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr5"><a href="{{ url_for('profile', name = postData[4][2]) }}">{{postData[4][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day5">{{postData[4][3]}}</td>
+                      <td class="post-txt-view" id="post_view5">{{postData[4][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit6"><a href="/read_post/{{postData[5][0]}}">{{postData[5][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr6"><a href="{{ url_for('profile', name = postData[5][2]) }}">{{postData[5][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day6">{{postData[5][3]}}</td>
+                      <td class="post-txt-view" id="post_view6">{{postData[5][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit7"><a href="/read_post/{{postData[6][0]}}">{{postData[6][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr7"><a href="{{ url_for('profile', name = postData[6][2]) }}">{{postData[6][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day7">{{postData[6][3]}}</td>
+                      <td class="post-txt-view" id="post_view7">{{postData[6][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit8"><a href="/read_post/{{postData[7][0]}}">{{postData[7][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr8"><a href="{{ url_for('profile', name = postData[7][2]) }}">{{postData[7][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day8">{{postData[7][3]}}</td>
+                      <td class="post-txt-view" id="post_view8">{{postData[7][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit9"><a href="/read_post/{{postData[8][0]}}">{{postData[8][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr9"><a href="{{ url_for('profile', name = postData[8][2]) }}">{{postData[8][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day9">{{postData[8][3]}}</td>
+                      <td class="post-txt-view" id="post_view9">{{postData[8][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                    <tr class="post-txt-rol" align="center">
+                      <td class="post=txt-icon">■</td>
+                      <td class="post-txt-tit" id="post_tit10"><a href="/read_post/{{postData[9][0]}}">{{postData[9][1]}}</a></td>
+                      <td class="post-txt-wr" id="post_wr10"><a href="{{ url_for('profile', name = postData[9][2]) }}">{{postData[9][2]}}</a></td>
+                      <td class="post-txt-day" id="post_day10">{{postData[9][3]}}</td>
+                      <td class="post-txt-view" id="post_view10">{{postData[9][4]}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="post-line"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="bottom"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+
+  </script>
+</html>
