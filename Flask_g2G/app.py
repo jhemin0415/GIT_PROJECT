@@ -304,7 +304,7 @@ def modify(num):
     cur.execute('select * from post where number = %s',(num, ))
     post = cur.fetchone()
     
-    if not session or session['id' != post[2]]:
+    if not session or session['id'] != post[2]:
         return redirect('/')
 
     if request.method == 'POST':
