@@ -1,4 +1,7 @@
-a = 1
-b = [[1],[2],[3],[4]]
+class test():
+    def __call__(self):
+        print(1)
 
-print(a in b[0])
+
+a = test()
+a()

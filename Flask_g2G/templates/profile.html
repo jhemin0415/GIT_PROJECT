@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Main 페이지</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/change_info.js') }}"></script>
@@ -140,9 +141,11 @@
                         <td class="post-day">
                           <span>{{postData[3]}}</span>
                         </td>
+                        {% if postData[2] == session['userid'] %}
                         <td class="post-del">
                           <button type="button" class="del-btn" name="button" value="{{loop.index - 1}}" onclick="del_post()">삭제</button>
                         </td>
+                        {% endif %}
                       </tr>
                       {% endfor %}
                       <tr>
